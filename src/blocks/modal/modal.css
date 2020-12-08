@@ -1,5 +1,6 @@
 @import url(../modal/__title/modal__title.css);
 @import url(../modal/__title/_type_auth/modal__titile_type_auth.css);
+@import url(../modal/__title/_type_auth-tooltip/modal__title_type_auth-tooltip.css);
 @import url(../modal/__btn/modal__btn.css);
 @import url(../modal/__btn/_type_auth/modal__btn_type_auth.css);
 @import url(../modal/__container/modal__container.css);
