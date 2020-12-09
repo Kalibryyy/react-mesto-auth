@@ -13,6 +13,7 @@ import Login from './Login.jsx';
 import InfoToolTip from './InfoTooltip';
 import ProtectedRoute from './ProtectedRoute';
 import { api } from '../utils/Api';
+import * as auth from '../utils/Auth';
 import { CurrentUserContext } from '../contexts/CurrentUserContext';
 
 function App() {
@@ -27,9 +28,8 @@ function App() {
   const [isLoggedIn, setIsLoggedIn] = React.useState(false);
   const [isAuthPopupOpen, setIsAuthPopupOpen] = React.useState(false);
 
-  function handleAuthFormSubmit(e) {
-    e.preventDefault();
-
+  function handleAuthFormSubmit({password, email}) {
+    auth.register({password, email});
     // setIsAuthPopupOpen(!isAuthPopupOpen); 
   }
 
