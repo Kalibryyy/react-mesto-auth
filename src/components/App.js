@@ -8,7 +8,7 @@ import PopupWithForm from './PopupWithForm';
 import EditProfilePopup from './EditPropfilePopup';
 import EditAvatarPopup from './EditAvatarPopup';
 import AddPlacePopup from './AddPlacePopup';
-import Register from './Register';
+import Register from './Register.jsx';
 import Login from './Login';
 import InfoToolTip from './InfoTooltip';
 import ProtectedRoute from './ProtectedRoute';
@@ -27,7 +27,7 @@ function App() {
   const [isLoggedIn, setIsLoggedIn] = React.useState(true);
   const [isAuthPopupOpen, setIsAuthPopupOpen] = React.useState(false);
 
-  function handleSubmit(e) {
+  function handleAuthFormSubmit(e) {
     e.preventDefault();
 
     // setIsAuthPopupOpen(!isAuthPopupOpen); 
@@ -153,7 +153,7 @@ function App() {
     </header>
       <Switch>
         <Route path="/sign-up">
-          <Register onSubmit={handleSubmit} />
+          <Register onFormSubmit={handleAuthFormSubmit} />
         </Route>
         <Route path="/sign-in">
           <Login />
