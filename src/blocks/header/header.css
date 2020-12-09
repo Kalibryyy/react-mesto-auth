@@ -1,6 +1,10 @@
+@import url(../header/__auth-title/header__auth-title.css);
+@import url(../header/__auth-title-wrapper/header__auth-title-wrapper.css);
+
 .header {
-  margin: 0 auto;
   max-width: 882px;
   border-bottom: 1px solid #545454;
   padding-bottom: 41px;
+  display: flex;
+  justify-content: space-between;
 }
