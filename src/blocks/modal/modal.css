@@ -20,6 +20,7 @@
 @import url(../modal/__container/_type_auth/modal__container_type_auth.css);
 @import url(../modal/_type_auth/modal_type_auth.css);
 @import url(../modal/__auth_paragraph/modal__auth-paragraph.css);
+@import url(../modal/__auth-signin/modal__auth-signin.css);
 
 .modal {
     visibility: hidden;

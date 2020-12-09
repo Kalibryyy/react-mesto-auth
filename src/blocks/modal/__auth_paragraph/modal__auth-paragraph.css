@@ -1,9 +1,9 @@
 .modal__auth-paragraph {
-  text-align: center;
   font-size: 14px;
+  color: #fff;
+  text-decoration: none;
 }
 
 .modal__auth-paragraph:hover {
-    /* background: rgba(255, 255, 255, 0.8); */
     cursor: pointer;
 }

@@ -9,7 +9,7 @@ import EditProfilePopup from './EditPropfilePopup';
 import EditAvatarPopup from './EditAvatarPopup';
 import AddPlacePopup from './AddPlacePopup';
 import Register from './Register.jsx';
-import Login from './Login';
+import Login from './Login.jsx';
 import InfoToolTip from './InfoTooltip';
 import ProtectedRoute from './ProtectedRoute';
 import { api } from '../utils/Api';
@@ -24,7 +24,7 @@ function App() {
   const [selectedCard, setSelectedCard] = React.useState({});
   const [currentUser, setCurrentUser] = React.useState({});
   const [cards, setCards] = React.useState([]);
-  const [isLoggedIn, setIsLoggedIn] = React.useState(true);
+  const [isLoggedIn, setIsLoggedIn] = React.useState(false);
   const [isAuthPopupOpen, setIsAuthPopupOpen] = React.useState(false);
 
   function handleAuthFormSubmit(e) {
@@ -142,13 +142,13 @@ function App() {
     <div className="page">
     <header className="header">
     <Route exact path="/">
-      <Header isLoggedIn={isLoggedIn} title={'Выйти'} />
+      <Header isLoggedIn={isLoggedIn} title={'Выйти'} link={"sign-in"} />
     </Route>
     <Route path="/sign-up">
-      <Header isLoggedIn={isLoggedIn} title={'Войти'} />
+      <Header isLoggedIn={isLoggedIn} title={'Войти'} link={"sign-in"}/>
     </Route>
     <Route path="/sign-in">
-      <Header isLoggedIn={isLoggedIn} title={'Регистрация'} />
+      <Header isLoggedIn={isLoggedIn} title={'Регистрация'} link={"sign-up"} />
     </Route>
     </header>
       <Switch>

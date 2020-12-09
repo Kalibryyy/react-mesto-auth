@@ -1,4 +1,5 @@
-import React from "react";
+import React from 'react';
+import { Link } from 'react-router-dom';
 
 function Register(props) { 
   const [formValues, setFormValues] = React.useState({
@@ -33,10 +34,10 @@ function Register(props) {
       <form onSubmit={handleSubmit}>
         <h2 className="modal__title modal__title_type_auth">Регистрация</h2>
         <input
-          type="text"
+          type="email"
           className="modal__input modal__input_type_auth"
           name="email"
-          // value={email}
+          value={email}
           placeholder="Email"
           minLength="1"
           maxLength="30"
@@ -44,7 +45,7 @@ function Register(props) {
           onChange={handleInputChange}
         />
         <input
-          type="url"
+          type="password"
           className="modal__input modal__input_type_auth"
           name="password"
           // value={password}
@@ -55,9 +56,9 @@ function Register(props) {
         <button type="submit" className="modal__btn modal__btn_type_auth">
           Зарегистрироваться
         </button>
-        <p className="modal__auth-paragraph hover">
-          Уже зарегистрированы? Войти
-        </p>
+        <div className="modal__auth-signin">
+          <Link to="sign-in" className="modal__auth-paragraph hover">Уже зарегистрированы? Войти</Link>
+        </div>
       </form>
     </div>
   );
