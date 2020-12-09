@@ -10,6 +10,7 @@ import EditAvatarPopup from './EditAvatarPopup';
 import AddPlacePopup from './AddPlacePopup';
 import Register from './Register';
 import Login from './Login';
+import InfoToolTip from './InfoTooltip';
 import ProtectedRoute from './ProtectedRoute';
 import { api } from '../utils/Api';
 import { CurrentUserContext } from '../contexts/CurrentUserContext';
@@ -24,6 +25,13 @@ function App() {
   const [currentUser, setCurrentUser] = React.useState({});
   const [cards, setCards] = React.useState([]);
   const [isLoggedIn, setIsLoggedIn] = React.useState(true);
+  const [isAuthPopupOpen, setIsAuthPopupOpen] = React.useState(false);
+
+  function handleSubmit(e) {
+    e.preventDefault();
+
+    // setIsAuthPopupOpen(!isAuthPopupOpen); 
+  }
 
   React.useEffect(() => {
     setIsSpinnerLoading(true);
@@ -59,6 +67,7 @@ function App() {
     setIsEditAvatarPopupOpen(false);
     setIsEditProfilePopupOpen(false);
     setIsAddPlacePopupOpen(false);
+    setIsAuthPopupOpen(false);
     
     if (selectedCard.link) {
       setSelectedCard(!selectedCard.link);
@@ -144,7 +153,7 @@ function App() {
     </header>
       <Switch>
         <Route path="/sign-up">
-          <Register />
+          <Register onSubmit={handleSubmit} />
         </Route>
         <Route path="/sign-in">
           <Login />
@@ -161,10 +170,10 @@ function App() {
       <PopupWithForm name={'confirm-card-del'} title={'Вы уверены?'} />
       <EditAvatarPopup isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups} isClose={isEditAvatarPopupOpen} onCardClick={handleCardClick} onUpdateAvatar={handleUpdateAvatar}/> 
       <ImagePopup card={selectedCard} onClose={closeAllPopups} /> 
+      <InfoToolTip isOpen={isAuthPopupOpen} onClose={closeAllPopups} />
     </div>
     </CurrentUserContext.Provider>
   )
 }
 
 export default App;
-
