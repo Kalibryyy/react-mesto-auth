@@ -1,14 +1,14 @@
 import React from 'react';
 
-function Header() {
+function Header({isLoggedIn, title}) {
     return (
-    <header className="header">
+    <>
         <div className="logo"></div>
         <div className="header__auth-title-wrapper">
-            <h2 className="header__auth-title">email@mail.com</h2>
-            <h2 className="header__auth-title">Регистрация</h2>
+            {isLoggedIn && <h2 className="header__auth-title">email@mail.com</h2>}
+            <h2 className={isLoggedIn ? `header__auth-title header__auth-title_type_exit` : `header__auth-title`}>{title}</h2>
         </div>
-    </header>
+    </>
     )
 }
 
