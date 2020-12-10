@@ -9,20 +9,20 @@ function Register(props) {
 
   console.log(formValues);
 
-  const { email, password } = formValues;
-
-  const handleInputChange = React.useCallback(
-    (e) => {
+  const handleInputChange = (e) => {
       const { name, value } = e.target;
-      setFormValues((prevState) => ({ ...prevState, [name]: value })); // объект меняется при каждом изменении, в setFormValues возвращаем этот новый объект, кот состоит из старых и нового перезаписанного поля
-    },
-    [setFormValues],
-  );
+      setFormValues({ 
+        ...formValues, 
+        [name]: value // объект меняется при каждом изменении, в setFormValues возвращаем этот новый объект, кот состоит из старых и нового перезаписанного поля
+      });
+  }
 
   function handleSubmit(e) {
     e.preventDefault();
 
-    // Передаём значения управляемых компонентов во внешний обработчик
+    const { email, password } = formValues;
+
+    // Передаю значения управляемых компонентов во внешний обработчик
     props.onFormSubmit({
       email,
       password
@@ -37,7 +37,6 @@ function Register(props) {
           type="email"
           className="modal__input modal__input_type_auth"
           name="email"
-          value={email}
           placeholder="Email"
           minLength="1"
           maxLength="30"
@@ -48,7 +47,6 @@ function Register(props) {
           type="password"
           className="modal__input modal__input_type_auth"
           name="password"
-          // value={password}
           placeholder="Пароль"
           required
           onChange={handleInputChange}

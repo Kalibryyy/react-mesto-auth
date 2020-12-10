@@ -29,8 +29,15 @@ function App() {
   const [isAuthPopupOpen, setIsAuthPopupOpen] = React.useState(false);
 
   function handleAuthFormSubmit({password, email}) {
-    auth.register({password, email});
+    auth.register({password, email})
+    .then((data) => {
+     
+    })
     // setIsAuthPopupOpen(!isAuthPopupOpen); 
+  };
+
+  function handleLogin() {
+
   }
 
   React.useEffect(() => {
