@@ -61,11 +61,9 @@ function App() {
   }
 
   function handleLogin({ password, email }) {
-    console.log(password, email);
     auth
       .authorize(password, email)
       .then((data) => {
-        console.log(data);
         if (data.token) {
           localStorage.setItem("jwt", data.token);
         }
@@ -92,6 +90,14 @@ function App() {
         })
         .catch((err) => console.error(err));
     }
+  }
+
+  function handleLogOut() {
+    const jwt = localStorage.removeItem("jwt");
+    setUserInfo({
+      email: '',
+    });
+    setIsLoggedIn(false);
   }
 
   React.useEffect(() => {
@@ -223,6 +229,7 @@ function App() {
               title={"Выйти"}
               link={"sign-in"}
               userData={userEmail}
+              onLogOut={handleLogOut}
             />
           </Route>
           <Route path="/sign-up">

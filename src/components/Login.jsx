@@ -6,8 +6,6 @@ function Login(props) {
     password: "",
   });
 
-  console.log(formValues);
-
   const handleInputChange = (e) => {
       const { name, value } = e.target;
       setFormValues({ 
