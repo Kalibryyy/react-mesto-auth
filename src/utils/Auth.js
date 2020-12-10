@@ -1,11 +1,13 @@
 export const BASE_URL = 'https://auth.nomoreparties.co';
 
-const checkResponse = (response) => {
-  return response.ok ? response.json() : Promise.reject(`Ошибка: ${response.status}`)
+const checkResponse = (res) => {
+  return new Promise((resolve, reject) => {
+    const func = res.status < 400 ? resolve : reject;
+    res.json().then(data => func({'status': res.status, 'data': data}))
+  })
 }
 
 export const register = (password, email) => {
-  console.log(password, email);
   return fetch(`${BASE_URL}/signup`, {
     method: 'POST',
     headers: {
@@ -18,7 +20,6 @@ export const register = (password, email) => {
 }; 
 
 export const authorize = (password, email) => {
-  console.log(password, email);
   return fetch(`${BASE_URL}/signin`, {
     method: 'POST',
     headers: {

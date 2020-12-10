@@ -34,6 +34,7 @@ function App() {
     email: "",
   });
   const [isSignedUp, setIsSignedUp] = React.useState(false);
+  const [message, setMessage] = React.useState('');
 
   const userEmail = userInfo.email;
 
@@ -55,8 +56,8 @@ function App() {
         history.push("/sign-in");
       })
       .catch((err) => {
-        console.error(err);
-        setIsAuthPopupOpen(!isAuthPopupOpen);
+          setMessage(`${err.data.error}`);
+          setIsAuthPopupOpen(!isAuthPopupOpen);
       });
   }
 
@@ -70,7 +71,10 @@ function App() {
         setIsLoggedIn(true);
         history.push("/");
       })
-      .catch((err) => console.error(err));
+      .catch((err) => {
+        setMessage(`${err.data.message}`);
+        setIsAuthPopupOpen(true);
+      });
   }
 
   function tokenCheck() {
@@ -79,7 +83,6 @@ function App() {
       auth
         .getContent(jwt)
         .then((res) => {
-          console.log(res.data.email)
           if (res.data.email) {
             setUserInfo({
               email: res.data.email,
@@ -93,7 +96,7 @@ function App() {
   }
 
   function handleLogOut() {
-    const jwt = localStorage.removeItem("jwt");
+    localStorage.removeItem("jwt");
     setUserInfo({
       email: '',
     });
@@ -295,6 +298,7 @@ function App() {
           isOpen={isAuthPopupOpen}
           onClose={closeAllPopups}
           isSignedUp={isSignedUp}
+          message={message}
         />
       </div>
     </CurrentUserContext.Provider>
