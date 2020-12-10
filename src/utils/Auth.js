@@ -31,7 +31,6 @@ export const authorize = ({password, email}) => {
 }; 
 
 export const getContent = (token) => {
-  console.log({password, email});
   return fetch(`${BASE_URL}/users/me`, {
     method: 'GET',
     headers: {
