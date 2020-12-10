@@ -27,16 +27,27 @@ function App() {
   const [cards, setCards] = React.useState([]);
   const [isLoggedIn, setIsLoggedIn] = React.useState(false);
   const [isAuthPopupOpen, setIsAuthPopupOpen] = React.useState(false);
+  const [userData, setUserData] = React.useState({
+    userName: '',
+    email: '',
+  });
 
-  function handleAuthFormSubmit({password, email}) {
-    auth.register({password, email})
-    .then((data) => {
-     
-    })
+  function handleRegister({password, email}) {
+    console.log(password, email)
+    auth.register(password, email)
+    .then(data => console.log(data))
+    .catch(err => console.error(err));
     // setIsAuthPopupOpen(!isAuthPopupOpen); 
   };
 
-  function handleLogin() {
+  function handleLogin({password, email}) {
+    console.log(password, email)
+    auth.authorize(password, email)
+    .then(data => console.log(data)) //undefined
+    .catch(err => console.error(err));
+  }
+
+  function tokenCheck() {
 
   }
 
@@ -160,10 +171,10 @@ function App() {
     </header>
       <Switch>
         <Route path="/sign-up">
-          <Register onFormSubmit={handleAuthFormSubmit} />
+          <Register onFormSubmit={handleRegister} />
         </Route>
         <Route path="/sign-in">
-          <Login />
+          <Login onFormSubmit={handleLogin} tokenCheck={tokenCheck} />
         </Route>
         <ProtectedRoute exact path="/" isLoggedIn={isLoggedIn} onEditAvatar={handleEditAvatarClick} onEditProfile={handleEditProfileClick} onAddPlace={handleAddPlaceClick} onClose={closeAllPopups} 
             onCardClick={handleCardClick} cards={cards} onCardDelete={handleCardDelete} onCardLike={handleCardLike} isLoading={isSpinnerLoading} component={Main} />
