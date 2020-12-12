@@ -40,7 +40,7 @@ function App() {
 
   const history = useHistory();
 
-  React.useEffect((_) => {
+  React.useEffect(() => {
     tokenCheck();
   }, []);
 
@@ -49,7 +49,7 @@ function App() {
       .register(password, email)
       .then((data) => {
         setUserInfo({
-          email: data.email,
+          email: data.data.data.email,
         });
         setIsSignedUp(true);
         setIsAuthPopupOpen(!isAuthPopupOpen);
@@ -65,10 +65,13 @@ function App() {
     auth
       .authorize(password, email)
       .then((data) => {
-        if (data.token) {
-          localStorage.setItem("jwt", data.token);
+        if (data.data.token) {
+          localStorage.setItem("jwt", data.data.token);
         }
         setIsLoggedIn(true);
+        setUserInfo({
+          email: email,
+        });
         history.push("/");
       })
       .catch((err) => {
@@ -83,10 +86,10 @@ function App() {
       auth
         .getContent(jwt)
         .then((res) => {
-          if (res.data.email) {
+          if (res.data.data.email) {
             setUserInfo({
-              email: res.data.email,
-            });
+              email: res.data.data.email,
+            })
             setIsLoggedIn(true);
             history.push("/");
           };

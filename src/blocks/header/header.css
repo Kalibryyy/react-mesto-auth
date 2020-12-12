@@ -3,7 +3,7 @@
 @import url(../header/__auth-title/_type_exit/header__auth-title_type_exit.css);
 
 .header {
-  max-width: 882px;
+  max-width: 100%;
   border-bottom: 1px solid #545454;
   padding-bottom: 41px;
   display: flex;
