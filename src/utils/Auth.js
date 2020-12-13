@@ -1,11 +1,6 @@
 export const BASE_URL = 'https://auth.nomoreparties.co';
 
-const checkResponse = (res) => {
-  return new Promise((resolve, reject) => {
-    const func = res.status < 400 ? resolve : reject;
-    res.json().then(data => func({'status': res.status, 'data': data}))
-  })
-}
+const checkResponse = (res) => { return res.ok ? res.json() : Promise.reject(res.status); }
 
 export const register = (password, email) => {
   return fetch(`${BASE_URL}/signup`, {

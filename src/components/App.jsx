@@ -49,14 +49,18 @@ function App() {
       .register(password, email)
       .then((data) => {
         setUserInfo({
-          email: data.data.data.email,
+          email: data.data.email,
         });
         setIsSignedUp(true);
         setIsAuthPopupOpen(!isAuthPopupOpen);
         history.push("/sign-in");
       })
       .catch((err) => {
-          setMessage(`${err.data.error}`);
+        console.log(err)
+        if (err === 400) {
+          setMessage('Некорректно заполнено одно из полей');
+        }
+          setIsSignedUp(false);
           setIsAuthPopupOpen(!isAuthPopupOpen);
       });
   }
@@ -65,8 +69,8 @@ function App() {
     auth
       .authorize(password, email)
       .then((data) => {
-        if (data.data.token) {
-          localStorage.setItem("jwt", data.data.token);
+        if (data.token) {
+          localStorage.setItem("jwt", data.token);
         }
         setIsLoggedIn(true);
         setUserInfo({
@@ -75,7 +79,12 @@ function App() {
         history.push("/");
       })
       .catch((err) => {
-        setMessage(`${err.data.message}`);
+        if (err === 400) {
+          setMessage('Не передано одно из полей');
+        } else if (err === 401) {
+          setMessage('Пользователь с email не найден');
+        }
+        setIsSignedUp(false);
         setIsAuthPopupOpen(true);
       });
   }
@@ -86,9 +95,9 @@ function App() {
       auth
         .getContent(jwt)
         .then((res) => {
-          if (res.data.data.email) {
+          if (res.data.email) {
             setUserInfo({
-              email: res.data.data.email,
+              email: res.data.email,
             })
             setIsLoggedIn(true);
             history.push("/");
