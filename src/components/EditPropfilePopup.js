@@ -25,13 +25,13 @@ function EditProfilePopup(props) {
     function handleSubmit(e) {
         // Запрещаем браузеру переходить по адресу формы
         e.preventDefault();
-
+    
         // Передаём значения управляемых компонентов во внешний обработчик
         props.onUpdateUser({
-            name,
-            about: description,
-        });
-    }
+          name,
+          about: description,
+        }); 
+      }
 
     return (
         <PopupWithForm name={'profile'} title={'Редактировать профиль'} isOpen={props.isOpen} onClose={props.onClose} isClose={props.isOpen} onSubmit={handleSubmit}>
